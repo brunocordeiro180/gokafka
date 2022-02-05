@@ -10,7 +10,7 @@ import (
 func main() {
 	deliveryChanel := make(chan kafka.Event)
 	var producer *kafka.Producer = NewKafkaProducer()
-	Publish("mensagem", "teste", producer, nil, deliveryChanel)
+	Publish("mensagem", "teste", producer, []byte("transferencia"), deliveryChanel)
 	go DeliveryReport(deliveryChanel) //async
 	e := <-deliveryChanel
 	msg := e.(*kafka.Message)
